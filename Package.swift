@@ -55,11 +55,11 @@ let package = Package(
             from: "2.6.3"
         ),
         .package(
-            url: "https://github.com/SnapKit/SnapKit",
+            url: "https://github.com/SnapKit/SnapKit.git",
             from: "5.6.0"
         ),
         .package(
-            url: "https://github.com/ninjaprox/NVActivityIndicatorView",
+            url: "https://github.com/ninjaprox/NVActivityIndicatorView.git",
             from: "5.1.1"
         )
     ],
