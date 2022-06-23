@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import NVActivityIndicatorView
-import StyleTarget
+import Style
 
 public final class NetworkingActivity {
     private static var zeroViewController: UIViewController = .init()

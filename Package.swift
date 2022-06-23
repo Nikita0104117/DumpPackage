@@ -12,31 +12,31 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AFNetworkingSession",
-            targets: ["AFNetworkingSessionTarget"]
+            targets: ["AFNetworkingSession"]
         ),
         .library(
             name: "TokenManager",
-            targets: ["TokenManagerTarget", "StoreTarget", "AFNetworkingSessionTarget"]
+            targets: ["TokenManager", "Store", "AFNetworkingSession"]
         ),
         .library(
             name: "AFNetworkingUI",
-            targets: ["AFNetworkingUITarget", "StyleTarget"]
+            targets: ["AFNetworkingUI", "Style"]
         ),
         .library(
             name: "Store",
-            targets: ["StoreTarget"]
+            targets: ["Store"]
         ),
         .library(
             name: "Style",
-            targets: ["StyleTarget"]
+            targets: ["Style"]
         ),
         .library(
             name: "BaseProtocols",
-            targets: ["BaseProtocolsTarget", "AFNetworkingUITarget"]
+            targets: ["BaseProtocols", "AFNetworkingUI"]
         ),
         .library(
             name: "Extentions",
-            targets: ["ExtentionsTarget"]
+            targets: ["Extentions"]
         )
     ],
     dependencies: [
@@ -67,33 +67,33 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "AFNetworkingSessionTarget",
+            name: "AFNetworkingSession",
             dependencies: [
                 .product(name: "Alamofire", package: "Alamofire")
             ],
             path: "Sources/AFNetworkingSession"
         ),
         .target(
-            name: "TokenManagerTarget",
+            name: "TokenManager",
             dependencies: [
                 .product(name: "Alamofire", package: "Alamofire"),
                 .product(name: "JWTDecode", package: "JWTDecode.swift"),
-                "StoreTarget",
-                "AFNetworkingSessionTarget"
+                "Store",
+                "AFNetworkingSession"
             ],
             path: "Sources/TokenManager"
         ),
         .target(
-            name: "AFNetworkingUITarget",
+            name: "AFNetworkingUI",
             dependencies: [
                 .product(name: "SnapKit", package: "SnapKit"),
                 .product(name: "NVActivityIndicatorView", package: "NVActivityIndicatorView"),
-                "StyleTarget"
+                "Style"
             ],
             path: "Sources/AFNetworkingUI"
         ),
         .target(
-            name: "StoreTarget",
+            name: "Store",
             dependencies: [
                 .product(name: "SnapKit", package: "SnapKit"),
                 .product(name: "KeychainAccess", package: "KeychainAccess")
@@ -101,19 +101,19 @@ let package = Package(
             path: "Sources/Store"
         ),
         .target(
-            name: "StyleTarget",
+            name: "Style",
             dependencies: [ ],
             path: "Sources/Style"
         ),
         .target(
-            name: "BaseProtocolsTarget",
+            name: "BaseProtocols",
             dependencies: [
-                "AFNetworkingUITarget"
+                "AFNetworkingUI"
             ],
             path: "Sources/BaseProtocols"
         ),
         .target(
-            name: "ExtentionsTarget",
+            name: "Extentions",
             dependencies: [ ],
             path: "Sources/Extentions"
         )

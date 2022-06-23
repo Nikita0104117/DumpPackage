@@ -8,8 +8,8 @@
 import Foundation
 import Alamofire
 import JWTDecode
-import StoreTarget
-import AFNetworkingSessionTarget
+import Store
+import AFNetworkingSession
 
 public final class TokenManager {
     enum Keys: String {
@@ -17,7 +17,7 @@ public final class TokenManager {
         case refreshToken
     }
 
-    struct TokensModel: Codable {
+    public struct TokensModel: Codable {
         var accessToken: String?
         var refreshToken: String?
     }
@@ -120,7 +120,7 @@ public final class TokenManager {
 
 // MARK: - Token Protocol
 extension TokenManager: TokenProtocol {
-    func updateToken(_ tokens: TokensModel?) {
+    public func updateToken(_ tokens: TokensModel?) {
         guard
             let tokens = tokens
         else {

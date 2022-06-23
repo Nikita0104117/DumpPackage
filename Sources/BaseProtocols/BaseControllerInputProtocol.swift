@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import AFNetworkingUITarget
+import AFNetworkingUI
 
 protocol BaseControllerInput: AnyObject {
     func showNetworking(error text: String?)

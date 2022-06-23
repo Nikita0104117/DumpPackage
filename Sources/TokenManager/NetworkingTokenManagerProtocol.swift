@@ -7,7 +7,7 @@
 
 // MARK: - Token Protocol
 
-protocol TokenProtocol: AnyObject {
+public protocol TokenProtocol: AnyObject {
     typealias Tokens = TokenManager.TokensModel
 
     func updateToken(_ tokens: Tokens?)
@@ -15,7 +15,7 @@ protocol TokenProtocol: AnyObject {
 
 // MARK: - Extension NetworkingRouter
 
-extension TokenManager {
+public extension TokenManager {
     enum TokenRouter {
         case refreshToken(TokenManager.TokensModel)
     }

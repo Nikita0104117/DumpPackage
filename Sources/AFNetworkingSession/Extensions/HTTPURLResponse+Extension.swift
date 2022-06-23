@@ -14,7 +14,7 @@ public extension HTTPURLResponse {
     enum HTTPStatusCode: Int, Error {
 
         /// The response class representation of status codes, these get grouped by their first digit.
-        enum ResponseType {
+        public enum ResponseType {
 
             /// - informational: This class of status code indicates a provisional response, consisting only of the Status-Line and optional headers, and is terminated by an empty line.
             case informational

@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import StyleTarget
+import Style
 
 public final class NetworkingMassage {
     public enum StyleType {
