@@ -12,7 +12,6 @@ import StoreTarget
 import AFNetworkingSessionTarget
 
 public final class TokenManager {
-//    typealias AuthCredential = OAuthAuthenticator.OAuthCredential
     enum Keys: String {
         case accessToken
         case refreshToken

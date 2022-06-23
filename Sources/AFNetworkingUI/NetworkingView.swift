@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 import StyleTarget
 
-final class NetworkingMassage {
-    enum StyleType {
+public final class NetworkingMassage {
+    public enum StyleType {
         case success
         case failure
     }
 
-    static func showMassege(viewController: UIViewController, text: String?, style: StyleType) {
+    public static func showMassege(viewController: UIViewController, text: String?, style: StyleType) {
         guard
             let navigationController = viewController.navigationController,
             let window = UIApplication.shared.keyWindow

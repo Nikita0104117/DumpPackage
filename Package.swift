@@ -15,8 +15,8 @@ let package = Package(
             targets: ["AFNetworkingSessionTarget"]
         ),
         .library(
-            name: "AFNetworkingSessionWithTokenManager",
-            targets: ["AFNetworkingSessionWithTokenManagerTarget", "StoreTarget", "AFNetworkingSessionTarget"]
+            name: "TokenManager",
+            targets: ["TokenManagerTarget", "StoreTarget", "AFNetworkingSessionTarget"]
         ),
         .library(
             name: "AFNetworkingUI",
@@ -30,10 +30,10 @@ let package = Package(
             name: "Style",
             targets: ["StyleTarget"]
         ),
-//        .library(
-//            name: "BaseProtocols",
-//            targets: ["BaseProtocolsTarget", "AFNetworkingUITarget"]
-//        ),
+        .library(
+            name: "BaseProtocols",
+            targets: ["BaseProtocolsTarget", "AFNetworkingUITarget"]
+        ),
         .library(
             name: "Extentions",
             targets: ["ExtentionsTarget"]
@@ -74,14 +74,14 @@ let package = Package(
             path: "Sources/AFNetworkingSession"
         ),
         .target(
-            name: "AFNetworkingSessionWithTokenManagerTarget",
+            name: "TokenManagerTarget",
             dependencies: [
                 .product(name: "Alamofire", package: "Alamofire"),
                 .product(name: "JWTDecode", package: "JWTDecode.swift"),
                 "StoreTarget",
                 "AFNetworkingSessionTarget"
             ],
-            path: "Sources/AFNetworkingSessionWithTokenManager"
+            path: "Sources/TokenManager"
         ),
         .target(
             name: "AFNetworkingUITarget",
@@ -105,13 +105,13 @@ let package = Package(
             dependencies: [ ],
             path: "Sources/Style"
         ),
-//        .target(
-//            name: "BaseProtocolsTarget",
-//            dependencies: [
-//                "AFNetworkingUITarget"
-//            ],
-//            path: "Sources/BaseProtocols"
-//        ),
+        .target(
+            name: "BaseProtocolsTarget",
+            dependencies: [
+                "AFNetworkingUITarget"
+            ],
+            path: "Sources/BaseProtocols"
+        ),
         .target(
             name: "ExtentionsTarget",
             dependencies: [ ],
