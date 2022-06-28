@@ -6,7 +6,7 @@
 //
 
 public protocol BaseInteractor {
-    associatedtype T: BaseInteractorOutput
+    associatedtype T
 
     var output: T? { get set }
 }

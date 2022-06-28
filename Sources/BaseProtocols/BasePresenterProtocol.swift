@@ -6,7 +6,7 @@
 //
 
 public protocol BasePresenterProtocol {
-    associatedtype C: BaseControllerInput
+    associatedtype C
     associatedtype I
     associatedtype R
     

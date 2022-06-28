@@ -9,8 +9,8 @@ import UIKit
 import AFNetworkingUI
 
 public protocol BaseController {
-    associatedtype P: BaseControllerOutput
-    associatedtype V: BaseViewOutput
+    associatedtype P
+    associatedtype V
 
     var output: P? { get set }
     var viewOutput: V? { get set }
