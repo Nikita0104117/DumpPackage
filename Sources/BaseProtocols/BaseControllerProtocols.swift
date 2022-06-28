@@ -8,7 +8,7 @@
 import UIKit
 import AFNetworkingUI
 
-public protocol BaseController: UIViewController {
+public protocol BaseController {
     associatedtype P: BaseControllerOutput
     associatedtype V: BaseViewOutput
 
