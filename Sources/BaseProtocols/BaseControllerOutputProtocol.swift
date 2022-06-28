@@ -5,7 +5,7 @@
 //  Created by Nikita Omelchenko
 //
 
-protocol BaseControllerOutput: AnyObject {
+public protocol BaseControllerOutput: AnyObject {
     func didLoad()
     func didAppear()
     func didDisappear()
@@ -13,7 +13,7 @@ protocol BaseControllerOutput: AnyObject {
     func willDisappear()
 }
 
-extension BaseControllerOutput {
+public extension BaseControllerOutput {
     func didLoad() {}
     func didAppear() {}
     func didDisappear() {}

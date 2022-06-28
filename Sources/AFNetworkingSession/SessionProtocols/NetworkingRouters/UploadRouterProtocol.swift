@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 // MARK: - Upload File Router Protocol
-protocol UploadRouterProtocol {
+public protocol UploadRouterProtocol {
     typealias Endpoint = String
 
     var fileURL: URL { get }
@@ -23,7 +23,7 @@ protocol UploadRouterProtocol {
     var addToken: Bool { get }
 }
 
-extension UploadRouterProtocol {
+public extension UploadRouterProtocol {
     var method: HTTPMethod { .post }
     var headers: HTTPHeaders? { nil }
     var addToken: Bool { false }

@@ -9,10 +9,8 @@ import UIKit
 
 public extension UIDevice {
     enum Model : String {
-
         //Simulator
         case simulator     = "simulator/sandbox",
-
              //iPod
              iPod1              = "iPod 1",
              iPod2              = "iPod 2",
@@ -119,7 +117,6 @@ public extension UIDevice {
         }
 
         let modelMap : [String: Model] = [
-
             //Simulator
             "i386"      : .simulator,
             "x86_64"    : .simulator,
@@ -213,7 +210,6 @@ public extension UIDevice {
             "iPad13,1"  : .iPadAir4,
             "iPad13,2"  : .iPadAir4,
 
-
             //iPhone
             "iPhone3,1" : .iPhone4,
             "iPhone3,2" : .iPhone4,
@@ -295,7 +291,12 @@ public extension UIDevice {
             "AppleTV11,1" : .AppleTV2_4K
         ]
 
-        guard let mcode = modelCode, let map = String(validatingUTF8: mcode), let model = modelMap[map] else { return Model.unrecognized }
+        guard
+            let mcode = modelCode,
+            let map = String(validatingUTF8: mcode),
+            let model = modelMap[map]
+        else { return Model.unrecognized }
+
         if model == .simulator {
             if let simModelCode = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
                 if let simMap = String(validatingUTF8: simModelCode), let simModel = modelMap[simMap] {

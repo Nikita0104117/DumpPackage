@@ -21,7 +21,7 @@ public protocol OAuthAuthenticatorDelegate: AnyObject {
     func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: AuthCredential) -> Bool
 }
 
-extension OAuthAuthenticatorDelegate {
+public extension OAuthAuthenticatorDelegate {
     func apply(_ credential: AuthCredential, to urlRequest: inout URLRequest) { }
 
     func refresh(

@@ -55,5 +55,4 @@ final class BaseEventMonitor: EventMonitor {
         let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
         debugPrint(progress)
     }
-
 }

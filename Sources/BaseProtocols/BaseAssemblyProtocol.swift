@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol BaseAssemblyProtocol {
+public protocol BaseAssemblyProtocol {
     func assemble() -> UIViewController
 }

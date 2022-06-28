@@ -8,7 +8,7 @@
 import UIKit
 import AFNetworkingUI
 
-protocol BaseControllerInput: AnyObject {
+public protocol BaseControllerInput: AnyObject {
     func showNetworking(error text: String?)
     func showNetworking(info text: String?)
     func showActivity()
@@ -16,7 +16,7 @@ protocol BaseControllerInput: AnyObject {
     func showActivity(delay: CGFloat)
 }
 
-extension BaseControllerInput where Self: UIViewController {
+public extension BaseControllerInput where Self: UIViewController {
     func showNetworking(error text: String?) {
         NetworkingMassage.showMassege(viewController: self, text: text, style: .failure)
     }

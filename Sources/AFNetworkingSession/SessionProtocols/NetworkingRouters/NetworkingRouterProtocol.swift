@@ -22,7 +22,7 @@ public protocol NetworkingRouterProtocol {
     var addAuth: Bool { get }
 }
 
-extension NetworkingRouterProtocol {
+public extension NetworkingRouterProtocol {
     var method: HTTPMethod { .get }
     var parameters: Encodable? { nil }
     var headers: HTTPHeaders? { nil }

@@ -12,7 +12,6 @@ public extension HTTPURLResponse {
     /// It includes codes from IETF internet standards, other IETF RFCs, other specifications, and some additional commonly used codes.
     /// The first digit of the status code specifies one of five classes of response; an HTTP client must recognise these five classes at a minimum.
     enum HTTPStatusCode: Int, Error {
-
         /// The response class representation of status codes, these get grouped by their first digit.
         public enum ResponseType {
 

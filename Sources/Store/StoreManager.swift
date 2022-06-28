@@ -15,10 +15,10 @@ public protocol StoreProtocol: AnyObject {
     func clear()
 }
 
-final class KeychainStore: StoreProtocol {
+public final class KeychainStore: StoreProtocol {
     private let keychain = Keychain(service: Bundle.main.bundleIdentifier ?? "")
 
-    func get<T>(_ key: String) -> T? where T: Decodable {
+    public func get<T>(_ key: String) -> T? where T: Decodable {
         do {
             guard let data = try keychain.getData(key) else { return nil }
 
@@ -29,7 +29,7 @@ final class KeychainStore: StoreProtocol {
         }
     }
 
-    func set<T>(_ value: T?, key: String) where T: Encodable {
+    public func set<T>(_ value: T?, key: String) where T: Encodable {
         guard let value = value else { return }
 
         do {
@@ -41,7 +41,7 @@ final class KeychainStore: StoreProtocol {
         }
     }
 
-    func remove(key: String) {
+    public func remove(key: String) {
         do {
             try keychain.remove(key)
         } catch let error {
@@ -49,7 +49,7 @@ final class KeychainStore: StoreProtocol {
         }
     }
 
-    func clear() {
+    public func clear() {
         do {
             try keychain.removeAll()
         } catch let error {
@@ -58,10 +58,10 @@ final class KeychainStore: StoreProtocol {
     }
 }
 
-final class UserDefaultsStore: StoreProtocol {
+public final class UserDefaultsStore: StoreProtocol {
     private let userDefaults = UserDefaults.standard
 
-    func get<T>(_ key: String) -> T? where T: Decodable {
+    public func get<T>(_ key: String) -> T? where T: Decodable {
         do {
             guard let data = userDefaults.object(forKey: key) as? Data else { return nil }
 
@@ -72,7 +72,7 @@ final class UserDefaultsStore: StoreProtocol {
         }
     }
 
-    func set<T>(_ value: T?, key: String) where T: Encodable {
+    public func set<T>(_ value: T?, key: String) where T: Encodable {
         guard let value = value else { return }
 
         do {
@@ -83,11 +83,11 @@ final class UserDefaultsStore: StoreProtocol {
         }
     }
 
-    func remove(key: String) {
+    public func remove(key: String) {
         userDefaults.removeObject(forKey: key)
     }
 
-    func clear() {
+    public func clear() {
         userDefaults.removePersistentDomain(forName: Bundle.main.bundleIdentifier ?? "")
         userDefaults.synchronize()
     }
