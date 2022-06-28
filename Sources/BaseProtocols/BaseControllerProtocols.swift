@@ -1,12 +1,20 @@
 //
-//  BaseControllerInputProtocol.swift
+//  BaseControllerProtocols.swift
+//  
 //
-//
-//  Created by Nikita Omelchenko
+//  Created by Nikita Omelchenko on 28.06.2022.
 //
 
 import UIKit
 import AFNetworkingUI
+
+public protocol BaseController: UIViewController {
+    associatedtype P: BaseControllerOutput
+    associatedtype V: BaseViewOutput
+
+    var output: P? { get set }
+    var viewOutput: V? { get set }
+}
 
 public protocol BaseControllerInput: AnyObject {
     func showNetworking(error text: String?)
@@ -43,4 +51,20 @@ public extension BaseControllerInput where Self: UIViewController {
             NetworkingActivity.hide()
         }
     }
+}
+
+public protocol BaseControllerOutput: AnyObject {
+    func didLoad()
+    func didAppear()
+    func didDisappear()
+    func willAppear()
+    func willDisappear()
+}
+
+public extension BaseControllerOutput {
+    func didLoad() {}
+    func didAppear() {}
+    func didDisappear() {}
+    func willAppear() {}
+    func willDisappear() {}
 }
