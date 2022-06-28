@@ -62,9 +62,9 @@ public protocol BaseControllerOutput: AnyObject {
 }
 
 public extension BaseControllerOutput {
-    func didLoad() {}
-    func didAppear() {}
-    func didDisappear() {}
-    func willAppear() {}
-    func willDisappear() {}
+    func didLoad() { }
+    func didAppear() { }
+    func didDisappear() { }
+    func willAppear() { }
+    func willDisappear() { }
 }
