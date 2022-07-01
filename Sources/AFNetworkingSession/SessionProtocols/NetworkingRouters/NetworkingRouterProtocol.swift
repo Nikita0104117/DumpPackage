@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-enum RequestRouter { }
+public enum RequestRouter { }
 
 // MARK: - Networking Router Protocol
 public protocol NetworkingRouterProtocol {
