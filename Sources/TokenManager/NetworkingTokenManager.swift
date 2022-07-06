@@ -18,8 +18,8 @@ public final class TokenManager {
     }
 
     public struct TokensModel: Codable {
-        var accessToken: String?
-        var refreshToken: String?
+        public var accessToken: String?
+        public var refreshToken: String?
 
         public init(accessToken: String?, refreshToken: String?) {
             self.accessToken = accessToken
