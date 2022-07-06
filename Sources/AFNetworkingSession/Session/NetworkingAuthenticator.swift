@@ -12,9 +12,9 @@ public final class OAuthAuthenticator: Authenticator {
     public weak var delegate: OAuthAuthenticatorDelegate?
 
     public struct OAuthCredential: AuthenticationCredential {
-        let accessToken: String
-        let refreshToken: String
-        let expiration: Date
+        public let accessToken: String
+        public let refreshToken: String
+        public let expiration: Date
 
         public init(accessToken: String, refreshToken: String, expiration: Date) {
             self.accessToken = accessToken
