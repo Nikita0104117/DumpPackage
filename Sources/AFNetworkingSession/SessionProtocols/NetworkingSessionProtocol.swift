@@ -18,5 +18,6 @@ public protocol NetworkingSessionProtocol: AnyObject {
     var interceptorDelegate: InterceptorDelegate? { get set }
 
     func request(_ type: NetworkingRouterProtocol) -> DataRequest?
+    func uploadFile(_ type: UploadRouterProtocol) -> DataRequest?
     func objectfromData<T: Decodable>(_ data: Data) -> T?
 }
