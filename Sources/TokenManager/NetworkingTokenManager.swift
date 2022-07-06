@@ -45,7 +45,7 @@ open class TokenManager {
         )
     }
 
-    init(rest: NetworkingSessionProtocol, keychainStore: StoreProtocol) {
+    public init(rest: NetworkingSessionProtocol, keychainStore: StoreProtocol) {
         self.rest = rest
         self.keychainStore = keychainStore
 
