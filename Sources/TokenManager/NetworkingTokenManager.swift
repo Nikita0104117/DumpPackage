@@ -11,7 +11,7 @@ import JWTDecode
 import Store
 import AFNetworkingSession
 
-public final class TokenManager {
+open class TokenManager {
     enum Keys: String {
         case accessToken
         case refreshToken
