@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-public class NetworkingSession: NetworkingSessionProtocol {
+public open class NetworkingSession: NetworkingSessionProtocol {
     private var baseURL: URL?
 
     private let eventMonitor: BaseEventMonitor = .init()
@@ -52,7 +52,7 @@ public class NetworkingSession: NetworkingSessionProtocol {
     public private(set) var decoder: JSONDecoder = JSONDecoder()
     public private(set) var encoder: JSONEncoder = JSONEncoder()
 
-    init(baseURL: String) {
+    public init(baseURL: String) {
         self.baseURL = URL(string: baseURL)
 
         self.rootQueue = DispatchQueue(label: "\(baseURL).\(Bundle.main.bundleIdentifier ?? "").rootQueue")
