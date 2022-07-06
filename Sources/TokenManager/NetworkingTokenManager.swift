@@ -20,6 +20,11 @@ public final class TokenManager {
     public struct TokensModel: Codable {
         var accessToken: String?
         var refreshToken: String?
+
+        public init(accessToken: String?, refreshToken: String?) {
+            self.accessToken = accessToken
+            self.refreshToken = refreshToken
+        }
     }
 
     private let keychainStore: StoreProtocol
@@ -87,7 +92,7 @@ public final class TokenManager {
             let refreshToken = refreshToken,
             let isExpired = try? decode(jwt: refreshToken).expired,
             !isExpired,
-            let model = TokenRouter.refreshToken(.init(refreshToken: refreshToken)) as? NetworkingRouterProtocol,
+            let model = TokenRouter.refreshToken(.init(accessToken: nil, refreshToken: refreshToken)) as? NetworkingRouterProtocol,
             let request = rest.request(model)
         else {
             completion(.failure(URLError(.cancelled)))
