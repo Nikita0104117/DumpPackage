@@ -17,6 +17,12 @@ public enum Style {
             var font: UIFont
             var numberOfLines: Int = 0
 
+            public init(titleColor: UIColor, font: UIFont, numberOfLines: Int = 0) {
+                self.titleColor = titleColor
+                self.font = font
+                self.numberOfLines = numberOfLines
+            }
+
             public func apply(_ object: UILabel) {
                 object.textColor = titleColor
                 object.font = font
@@ -29,6 +35,11 @@ public enum Style {
         public struct ColoredTextView: Applicable {
             var textColor: UIColor
             var font: UIFont
+
+            public init(textColor: UIColor, font: UIFont) {
+                self.textColor = textColor
+                self.font = font
+            }
 
             public func apply(_ object: UITextView) {
                 object.textColor = textColor
@@ -43,6 +54,18 @@ public enum Style {
             let axis: NSLayoutConstraint.Axis
             var alignment: UIStackView.Alignment = .fill
             var distribution: UIStackView.Distribution = .fill
+
+            public init(
+                spacing: CGFloat,
+                axis: NSLayoutConstraint.Axis,
+                alignment: UIStackView.Alignment = .fill,
+                distribution: UIStackView.Distribution = .fill
+            ) {
+                self.spacing = spacing
+                self.axis = axis
+                self.alignment = alignment
+                self.distribution = distribution
+            }
 
             public func apply(_ object: UIStackView) {
                 object.spacing = spacing
@@ -64,6 +87,12 @@ public enum Style {
             let font: UIFont
             var borderColor: UIColor?
 
+            public init(color: UIColor, font: UIFont, borderColor: UIColor? = nil) {
+                self.color = color
+                self.font = font
+                self.borderColor = borderColor
+            }
+
             public func apply(_ object: UITextField) {
                 object.borderStyle = .none
                 object.textColor = color
@@ -82,6 +111,11 @@ public enum Style {
             let contentMode: UIView.ContentMode
             let cornerRadius: CGFloat
 
+            public init(contentMode: UIView.ContentMode, cornerRadius: CGFloat) {
+                self.contentMode = contentMode
+                self.cornerRadius = cornerRadius
+            }
+
             public func apply(_ object: UIImageView) {
                 object.contentMode = contentMode
                 object.layer.cornerRadius = cornerRadius
@@ -93,32 +127,53 @@ public enum Style {
     public enum Button {
         public struct ColoredButton: Applicable {
             var background: UIColor?
-            var border: UIColor?
-            var title: UIColor?
-            var cornerRadius: CGFloat?
-            let font: UIFont?
-            var contentEdgeInsets: UIEdgeInsets?
-            var image: UIImage?
-            var selectedImage: UIImage?
 
-            init(
+            var tintColor: UIColor?
+
+            var titleColor: UIColor?
+            var titleColorSelected: UIColor?
+            var titleColorHighlighted: UIColor?
+            var titleColorDisabled: UIColor?
+
+            var image: UIImage?
+            var imageSelected: UIImage?
+            var imageHighlighted: UIImage?
+            var imageDisabled: UIImage?
+
+            var cornerRadius: CGFloat?
+
+            let font: UIFont?
+
+            var contentEdgeInsets: UIEdgeInsets?
+
+            public init(
                 background: UIColor? = nil,
-                border: UIColor? = nil,
-                title: UIColor? = nil,
-                font: UIFont? = nil,
-                cornerRadius: CGFloat? = nil,
-                contentEdgeInsets: UIEdgeInsets? = nil,
+                tintColor: UIColor? = nil,
+                titleColor: UIColor? = nil,
+                titleColorSelected: UIColor? = nil,
+                titleColorHighlighted: UIColor? = nil,
+                titleColorDisabled: UIColor? = nil,
                 image: UIImage? = nil,
-                selectedImage: UIImage? = nil
+                imageSelected: UIImage? = nil,
+                imageHighlighted: UIImage? = nil,
+                imageDisabled: UIImage? = nil,
+                cornerRadius: CGFloat? = nil,
+                font: UIFont? = nil,
+                contentEdgeInsets: UIEdgeInsets? = nil
             ) {
                 self.background = background
-                self.border = border
-                self.title = title
+                self.tintColor = tintColor
+                self.titleColor = titleColor
+                self.titleColorSelected = titleColorSelected
+                self.titleColorHighlighted = titleColorHighlighted
+                self.titleColorDisabled = titleColorDisabled
+                self.image = image
+                self.imageSelected = imageSelected
+                self.imageHighlighted = imageHighlighted
+                self.imageDisabled = imageDisabled
                 self.cornerRadius = cornerRadius
                 self.font = font
                 self.contentEdgeInsets = contentEdgeInsets
-                self.image = image
-                self.selectedImage = selectedImage
             }
 
             public func apply(_ object: UIButton) {
@@ -128,16 +183,36 @@ public enum Style {
                     object.backgroundColor = background
                 }
 
-                if let border = border {
-                    object.layer.borderWidth = 1
-                    object.layer.borderColor = border.cgColor
+                if let tintColor = tintColor {
+                    object.tintColor = tintColor
                 }
 
-                if let title = title {
-                    object.setTitleColor(title, for: .normal)
-                    object.setTitleColor(title.withAlphaComponent(0.5), for: .disabled)
-                    object.setTitleColor(title.withAlphaComponent(0.7), for: .highlighted)
-                    object.setTitleColor(title.withAlphaComponent(0.7), for: .selected)
+                if let titleColor = titleColor {
+                    object.setTitleColor(titleColor, for: .normal)
+                    object.setTitleColor(titleColor.withAlphaComponent(0.4), for: .disabled)
+                    object.setTitleColor(titleColor.withAlphaComponent(0.6), for: .highlighted)
+                }
+                if let titleColorSelected = titleColorSelected {
+                    object.setTitleColor(titleColorSelected, for: .selected)
+                }
+                if let titleColorHighlighted = titleColorHighlighted {
+                    object.setTitleColor(titleColorHighlighted, for: .highlighted)
+                }
+                if let titleColorDisabled = titleColorDisabled {
+                    object.setTitleColor(titleColorDisabled, for: .disabled)
+                }
+
+                if let image = image {
+                    object.setImage(image, for: .normal)
+                }
+                if let imageSelected = imageSelected {
+                    object.setImage(imageSelected, for: .selected)
+                }
+                if let imageHighlighted = imageHighlighted {
+                    object.setImage(imageHighlighted, for: .highlighted)
+                }
+                if let imageDisabled = imageDisabled {
+                    object.setImage(imageDisabled, for: .disabled)
                 }
 
                 if let cornerRadius = cornerRadius {
@@ -148,16 +223,8 @@ public enum Style {
                     object.contentEdgeInsets = contentEdgeInsets
                 }
 
-                if let image = image {
-                    object.setImage(image, for: .normal)
-                }
-
-                if let selectedImage = selectedImage {
-                    object.setImage(selectedImage, for: .selected)
-                }
-
                 if let font = font {
-                object.titleLabel?.font = font
+                    object.titleLabel?.font = font
                 }
             }
         }
