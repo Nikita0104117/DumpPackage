@@ -16,6 +16,8 @@ public protocol StoreProtocol: AnyObject {
 }
 
 public final class KeychainStore: StoreProtocol {
+    public init() {}
+
     private let keychain = Keychain(service: Bundle.main.bundleIdentifier ?? "")
 
     public func get<T>(_ key: String) -> T? where T: Decodable {
@@ -59,6 +61,8 @@ public final class KeychainStore: StoreProtocol {
 }
 
 public final class UserDefaultsStore: StoreProtocol {
+    public init() {}
+    
     private let userDefaults = UserDefaults.standard
 
     public func get<T>(_ key: String) -> T? where T: Decodable {
