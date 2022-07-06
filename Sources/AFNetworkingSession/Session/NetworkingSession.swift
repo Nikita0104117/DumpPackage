@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-public open class NetworkingSession: NetworkingSessionProtocol {
+open class NetworkingSession: NetworkingSessionProtocol {
     private var baseURL: URL?
 
     private let eventMonitor: BaseEventMonitor = .init()
