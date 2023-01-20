@@ -134,6 +134,47 @@ open class NetworkingSession: NetworkingSessionProtocol {
         )
     }
 
+    public func responseData<T: Decodable>(_ response: AFDataResponse<Data>) -> Result<T, Error> {
+        let errorsKey: String = "errors"
+
+        switch response.result {
+            case .success(let data):
+                guard
+                    let responseType = response.response?.status?.responseType
+                else {
+                    return .failure(URLError(.badServerResponse))
+                }
+
+                switch responseType {
+                    case .clientError, .serverError:
+                        guard
+                            let errorObject = data.convertToDictionary(),
+                            let errors = errorObject[errorsKey] as? [String: [String]]
+                        else {
+                            return .failure(URLError(.badServerResponse))
+                        }
+
+                        let errorString = errors.values.flatMap({ $0 }).joined(separator: "\n")
+                        let error: Error = NetworkingError.customError(errorString)
+
+                        return .failure(error)
+
+                    default:
+                        break
+                }
+
+                guard
+                    let object: T = self.objectfromData(data)
+                else {
+                    return .failure(URLError(.badServerResponse))
+                }
+
+                return .success(object)
+            case .failure(let error):
+                return .failure(error)
+        }
+    }
+
     public func objectfromData<T: Decodable>(_ data: Data) -> T? {
         do {
             let object = try self.decoder.decode(T.self, from: data)

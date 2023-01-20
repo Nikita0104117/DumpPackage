@@ -20,13 +20,14 @@ public protocol NetworkingRouterProtocol {
     var encoder: ParameterEncoding { get }
     var headers: HTTPHeaders? { get }
     var addAuth: Bool { get }
+    var data: Data? { get }
 }
 
 public extension NetworkingRouterProtocol {
-    var method: HTTPMethod { .get }
     var parameters: Encodable? { nil }
-    var headers: HTTPHeaders? { nil }
+    var headers: HTTPHeaders? { ["Accept": "application/json"] }
     var addAuth: Bool { false }
+    var data: Data? { nil }
 
     var encoder: ParameterEncoding {
         switch method {

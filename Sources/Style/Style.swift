@@ -24,10 +24,10 @@ public enum Style {
             }
 
             public func apply(_ object: UILabel) {
-                object.textColor = titleColor
-                object.font = font
-                object.numberOfLines = numberOfLines
-            }
+                            object.textColor = titleColor
+                            object.font = font
+                            object.numberOfLines = numberOfLines
+                        }
         }
     }
 
