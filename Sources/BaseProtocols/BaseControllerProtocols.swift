@@ -47,9 +47,7 @@ public extension BaseControllerInput where Self: UIViewController {
     }
 
     func hideActivity() {
-        DispatchQueue.main.async {
-            NetworkingActivity.hide()
-        }
+        NetworkingActivity.hide()
     }
 }
 
