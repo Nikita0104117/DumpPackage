@@ -209,8 +209,6 @@ public enum Style {
 
                 if let titleColor = titleColor {
                     object.setTitleColor(titleColor, for: .normal)
-                    object.setTitleColor(titleColor.withAlphaComponent(0.4), for: .disabled)
-                    object.setTitleColor(titleColor.withAlphaComponent(0.6), for: .highlighted)
                 }
                 if let titleColorSelected = titleColorSelected {
                     object.setTitleColor(titleColorSelected, for: .selected)
