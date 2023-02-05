@@ -24,10 +24,10 @@ public enum Style {
             }
 
             public func apply(_ object: UILabel) {
-                            object.textColor = titleColor
-                            object.font = font
-                            object.numberOfLines = numberOfLines
-                        }
+                object.textColor = titleColor
+                object.font = font
+                object.numberOfLines = numberOfLines
+            }
         }
     }
 
@@ -77,8 +77,6 @@ public enum Style {
 
         public static let defaultHorizontalStack0 = DefaulStack(spacing: 0, axis: .horizontal)
         public static let defaultVerticalStack0 = DefaulStack(spacing: 0, axis: .vertical)
-        public static let defaultHorizontalStack8 = DefaulStack(spacing: 8, axis: .horizontal)
-        public static let defaultVerticalStack8 = DefaulStack(spacing: 8, axis: .vertical)
     }
 
     public enum TextField {
@@ -126,7 +124,10 @@ public enum Style {
 
     public enum Button {
         public struct ColoredButton: Applicable {
-            var background: UIColor?
+            var backgroundColor: UIColor?
+            var backgroundColorSelected: UIColor?
+            var backgroundColorHighlighted: UIColor?
+            var backgroundColorDisabled: UIColor?
 
             var tintColor: UIColor?
 
@@ -147,7 +148,10 @@ public enum Style {
             var contentEdgeInsets: UIEdgeInsets?
 
             public init(
-                background: UIColor? = nil,
+                backgroundColor: UIColor? = nil,
+                backgroundColorSelected: UIColor? = nil,
+                backgroundColorHighlighted: UIColor? = nil,
+                backgroundColorDisabled: UIColor? = nil,
                 tintColor: UIColor? = nil,
                 titleColor: UIColor? = nil,
                 titleColorSelected: UIColor? = nil,
@@ -161,16 +165,23 @@ public enum Style {
                 font: UIFont? = nil,
                 contentEdgeInsets: UIEdgeInsets? = nil
             ) {
-                self.background = background
+                self.backgroundColor = backgroundColor
+                self.backgroundColorSelected = backgroundColorSelected
+                self.backgroundColorHighlighted = backgroundColorHighlighted
+                self.backgroundColorDisabled = backgroundColorDisabled
+
                 self.tintColor = tintColor
+
                 self.titleColor = titleColor
                 self.titleColorSelected = titleColorSelected
                 self.titleColorHighlighted = titleColorHighlighted
                 self.titleColorDisabled = titleColorDisabled
+
                 self.image = image
                 self.imageSelected = imageSelected
                 self.imageHighlighted = imageHighlighted
                 self.imageDisabled = imageDisabled
+
                 self.cornerRadius = cornerRadius
                 self.font = font
                 self.contentEdgeInsets = contentEdgeInsets
@@ -179,8 +190,17 @@ public enum Style {
             public func apply(_ object: UIButton) {
                 object.layer.masksToBounds = true
 
-                if let background = background {
-                    object.backgroundColor = background
+                if let backgroundColor = backgroundColor {
+                    object.setBackgroundColor(backgroundColor, for: .normal)
+                }
+                if let backgroundColorSelected = backgroundColorSelected {
+                    object.setBackgroundColor(backgroundColorSelected, for: .selected)
+                }
+                if let titleColorHighlighted = titleColorHighlighted {
+                    object.setBackgroundColor(titleColorHighlighted, for: .highlighted)
+                }
+                if let titleColorDisabled = titleColorDisabled {
+                    object.setBackgroundColor(titleColorDisabled, for: .disabled)
                 }
 
                 if let tintColor = tintColor {
@@ -236,8 +256,20 @@ public enum Style {
         public static let zeroInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
-    public enum CornerRadius {
-        public static let `default` = 10.0
-        public static let normal = 20.0
+    public enum CornerRadius {}
+}
+
+private extension UIButton {
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
+        self.clipsToBounds = true
+        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+
+        if let context = UIGraphicsGetCurrentContext() {
+            context.setFillColor(color.cgColor)
+            context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+            let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            self.setBackgroundImage(colorImage, for: state)
+        }
     }
 }
