@@ -11,7 +11,7 @@ public protocol BaseInteractor {
     var output: T? { get set }
 }
 
-public protocol BaseInteractorOutput {
+public protocol BaseInteractorOutput: AnyObject {
     func success(with message: String?)
     func failure(with error: String?)
 }
