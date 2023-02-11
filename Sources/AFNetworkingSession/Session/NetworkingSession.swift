@@ -8,6 +8,8 @@
 import Foundation
 import Alamofire
 
+public typealias Response<T: Decodable> = Result<T, Error>
+
 open class NetworkingSession: NetworkingSessionProtocol {
     private var baseURL: URL?
 
