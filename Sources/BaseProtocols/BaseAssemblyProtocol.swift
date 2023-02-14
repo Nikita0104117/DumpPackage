@@ -11,6 +11,6 @@ public protocol BaseAssembly {
     func assemble() -> UIViewController
 }
 
-extension BaseAssembly {
+public extension BaseAssembly {
     func assemble() -> UIViewController { .init() }
 }
