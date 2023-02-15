@@ -26,11 +26,11 @@ public protocol BaseControllerInput: AnyObject {
 
 public extension BaseControllerInput where Self: UIViewController {
     func showNetworking(error text: String?) {
-        NetworkingMassage.showMassege(viewController: self, text: text, style: .success)
+        NetworkingMassage.showMassege(viewController: self, text: text, style: .failure)
     }
 
     func showNetworking(info text: String?) {
-        NetworkingMassage.showMassege(viewController: self, text: text, style: .failure)
+        NetworkingMassage.showMassege(viewController: self, text: text, style: .success)
     }
 
     func showActivity(delay: CGFloat) {
