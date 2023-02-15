@@ -15,7 +15,14 @@ public final class NetworkingMassage {
         case failure
     }
 
-    public static func showMassege(viewController: UIViewController, text: String?, style: StyleType) {
+    public static func showMassege(
+        viewController: UIViewController,
+        text: String?, style: StyleType,
+        bgInfoColor: UIColor = .lightGray,
+        textColor: UIColor = .white,
+        bgErrorColor: UIColor = .red,
+        textFont: UIFont = .systemFont(ofSize: 16)
+    ) {
         guard
             let navigationController = viewController.navigationController,
             let window = UIApplication.shared.keyWindow
@@ -30,13 +37,13 @@ public final class NetworkingMassage {
         }
 
         let rootView = build {
-            $0.backgroundColor = style == .success ? .lightGray : .red
+            $0.backgroundColor = style == .success ? bgInfoColor : bgErrorColor
         }
 
         let textLabel: UILabel = build {
-            $0.textColor = .black
+            $0.textColor = textColor
             $0.numberOfLines = 0
-            $0.font = .systemFont(ofSize: 16)
+            $0.font = textFont
             $0.text = text
         }
 
@@ -46,7 +53,7 @@ public final class NetworkingMassage {
         navigationController.navigationBar.addSubview(stack)
 
         textLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(statusBarHeight )
+            make.top.equalToSuperview().inset(statusBarHeight + 16)
             make.bottom.right.left.equalToSuperview().inset(24)
         }
 
