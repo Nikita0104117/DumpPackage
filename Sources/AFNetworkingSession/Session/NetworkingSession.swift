@@ -138,6 +138,7 @@ open class NetworkingSession: NetworkingSessionProtocol {
 
     public func responseData<T: Decodable>(_ response: AFDataResponse<Data>) -> Result<T, Error> {
         let errorsKey: String = "errors"
+        let message: String = "message"
 
         switch response.result {
             case .success(let data):
@@ -150,16 +151,25 @@ open class NetworkingSession: NetworkingSessionProtocol {
                 switch responseType {
                     case .clientError, .serverError:
                         guard
-                            let errorObject = data.convertToDictionary(),
-                            let errors = errorObject[errorsKey] as? [String: [String]]
+                            let errorObject = data.convertToDictionary()
                         else {
                             return .failure(URLError(.badServerResponse))
                         }
 
-                        let errorString = errors.values.flatMap({ $0 }).joined(separator: "\n")
-                        let error: Error = NetworkingError.customError(errorString)
+                        if let errorString: String = errorObject[message] as? String {
+                            let error: Error = NetworkingError.customError(errorString)
+                            return .failure(error)
+                        }
 
-                        return .failure(error)
+                        if let errors = errorObject[errorsKey] as? [String: [String]] {
+                            let errorString = errors.values.flatMap({ $0 }).joined(separator: "\n")
+                            let error: Error = NetworkingError.customError(errorString)
+
+                            return .failure(error)
+                        }
+
+                        return .failure(URLError(.badServerResponse))
+
 
                     default:
                         break
@@ -168,7 +178,7 @@ open class NetworkingSession: NetworkingSessionProtocol {
                 guard
                     let object: T = self.objectfromData(data)
                 else {
-                    return .failure(URLError(.badServerResponse))
+                    return .failure(URLError(.cannotDecodeContentData))
                 }
 
                 return .success(object)
