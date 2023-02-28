@@ -25,6 +25,6 @@ public protocol UploadRouterProtocol {
 
 public extension UploadRouterProtocol {
     var method: HTTPMethod { .post }
-    var headers: HTTPHeaders? { nil }
+    var headers: HTTPHeaders? { ["Accept": "application/json"] }
     var addToken: Bool { false }
 }
