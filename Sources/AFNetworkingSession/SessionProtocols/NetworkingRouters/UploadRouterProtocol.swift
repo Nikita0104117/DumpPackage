@@ -20,11 +20,11 @@ public protocol UploadRouterProtocol {
     var path: Endpoint { get }
     var method: HTTPMethod { get }
     var headers: HTTPHeaders? { get }
-    var addToken: Bool { get }
+    var addAuth: Bool { get }
 }
 
 public extension UploadRouterProtocol {
     var method: HTTPMethod { .post }
     var headers: HTTPHeaders? { ["Accept": "application/json"] }
-    var addToken: Bool { false }
+    var addAuth: Bool { false }
 }

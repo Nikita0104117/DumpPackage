@@ -132,7 +132,7 @@ open class NetworkingSession: NetworkingSessionProtocol {
             to: baseURL.appendingPathComponent(type.path),
             method: type.method,
             headers: type.headers,
-            interceptor: type.addToken ? authInterceptor : nil
+            interceptor: type.addAuth ? authInterceptor : nil
         )
     }
 
