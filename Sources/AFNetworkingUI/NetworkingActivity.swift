@@ -46,7 +46,7 @@ public final class NetworkingActivity {
 
         activity.startAnimating()
 
-        navigationController.present(zeroViewController, animated: false) { [weak self] in isPresented = true }
+        navigationController.present(zeroViewController, animated: false) { [weak self] in self?.isPresented = true }
 
     }
 
