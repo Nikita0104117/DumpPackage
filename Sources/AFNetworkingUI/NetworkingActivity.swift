@@ -20,6 +20,7 @@ public final class NetworkingActivity {
     }
 
     private static var isPresented: Bool = false
+    private static var isNeedToHide: Bool = false
 
     public static func show(viewController: UIViewController, color: UIColor, type: NVActivityIndicatorType) {
         guard
@@ -46,11 +47,20 @@ public final class NetworkingActivity {
 
         activity.startAnimating()
 
-        navigationController.present(zeroViewController, animated: false) { self.isPresented = true }
+        navigationController.present(zeroViewController, animated: false) {
+            self.isPresented = true
+            if self.isNeedToHide {
+                isNeedToHide = false
+                self.hide()
+            }
+        }
     }
 
     public static func hide() {
-        guard isPresented else { return }
+        guard isPresented else {
+            isNeedToHide = true
+            return
+        }
 
         activity.stopAnimating()
         zeroViewController.dismiss(animated: false) {
