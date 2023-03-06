@@ -46,8 +46,7 @@ public final class NetworkingActivity {
 
         activity.startAnimating()
 
-        navigationController.present(zeroViewController, animated: false) { [weak self] in self?.isPresented = true }
-
+        navigationController.present(zeroViewController, animated: false) { self.isPresented = true }
     }
 
     public static func hide() {
