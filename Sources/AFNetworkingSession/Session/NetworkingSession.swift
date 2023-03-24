@@ -151,7 +151,7 @@ open class NetworkingSession: NetworkingSessionProtocol {
                 switch responseType {
                     case .clientError, .serverError:
                         guard
-                            let errorObject = data.convertToDictionary()
+                            let _ = data.convertToDictionary()
                         else {
                             return .failure(URLError(.badServerResponse))
                         }
@@ -165,8 +165,6 @@ open class NetworkingSession: NetworkingSessionProtocol {
                         }
 
                         return .failure(URLError(.badServerResponse))
-
-
                     default:
                         break
                 }
