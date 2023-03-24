@@ -20,3 +20,11 @@ extension NetworkingError: LocalizedError {
     }
 }
 
+// {"message":"The given data was invalid.","errors":{"first_name":["The first name field is required."],"last_name":["The last name field is required."]}}
+
+// {"message":"The given data was invalid.","errors":{"message":["Old password error"]}}
+
+struct ErrorObject: Decodable {
+    let message: String
+    let errors: [String:[String]]
+}

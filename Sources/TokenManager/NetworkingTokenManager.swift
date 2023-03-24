@@ -105,7 +105,7 @@ open class TokenManager {
             switch response.result {
                 case .success(let data):
                     guard
-                        let tokensModel: TokensModel = self.rest.objectfromData(data),
+                        let tokensModel: TokensModel = self.rest.objectFromData(data),
                         let authCredential = self.configAuthCredential(tokensModel: tokensModel)
                     else {
                         completion(.failure(URLError(.badServerResponse)))

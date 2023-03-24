@@ -156,14 +156,10 @@ open class NetworkingSession: NetworkingSessionProtocol {
                             return .failure(URLError(.badServerResponse))
                         }
 
-                        if let errorString: String = errorObject[message] as? String {
-                            let error: Error = NetworkingError.customError(errorString)
-                            return .failure(error)
-                        }
-
-                        if let errors = errorObject[errorsKey] as? [String: [String]] {
-                            let errorString = errors.values.flatMap({ $0 }).joined(separator: "\n")
-                            let error: Error = NetworkingError.customError(errorString)
+                        if let errorObject: ErrorObject = errorObjectFromData(data) {
+                            debugPrint("ℹ️ \(errorObject)")
+                            let errorText = errorObject.errors.first?.value.first ?? errorObject.message
+                            let error: Error = NetworkingError.customError(errorText)
 
                             return .failure(error)
                         }
@@ -176,7 +172,7 @@ open class NetworkingSession: NetworkingSessionProtocol {
                 }
 
                 guard
-                    let object: T = self.objectfromData(data)
+                    let object: T = self.objectFromData(data)
                 else {
                     return .failure(URLError(.cannotDecodeContentData))
                 }
@@ -187,7 +183,17 @@ open class NetworkingSession: NetworkingSessionProtocol {
         }
     }
 
-    public func objectfromData<T: Decodable>(_ data: Data) -> T? {
+    public func objectFromData<T: Decodable>(_ data: Data) -> T? {
+        do {
+            let object = try self.decoder.decode(T.self, from: data)
+            return object
+        } catch let error {
+            debugPrint(error.localizedDescription)
+            return nil
+        }
+    }
+
+    public func errorObjectFromData<T: Decodable>(_ data: Data) -> T? {
         do {
             let object = try self.decoder.decode(T.self, from: data)
             return object
