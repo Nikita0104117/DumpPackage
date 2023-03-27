@@ -191,7 +191,7 @@ open class NetworkingSession: NetworkingSessionProtocol {
         }
     }
 
-    public func errorObjectFromData<T: Decodable>(_ data: Data) -> T? {
+    public func errorObjectFromData<T: ServerError>(_ data: Data) -> T? {
         do {
             let object = try self.decoder.decode(T.self, from: data)
             return object

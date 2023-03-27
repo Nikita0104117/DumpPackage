@@ -20,11 +20,16 @@ extension NetworkingError: LocalizedError {
     }
 }
 
+// MARK: - Server Error Example
 // {"message":"The given data was invalid.","errors":{"first_name":["The first name field is required."],"last_name":["The last name field is required."]}}
 
 // {"message":"The given data was invalid.","errors":{"message":["Old password error"]}}
 
-struct ErrorObject: Decodable {
+// MARK: - ServerError
+public typealias ServerError = Decodable & Error
+
+// MARK: - ErrorObject
+public struct ErrorObject: ServerError {
     let message: String
     let errors: [String:[String]]
 }
