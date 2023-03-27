@@ -23,5 +23,5 @@ public protocol NetworkingSessionProtocol: AnyObject {
     func responseData<T: Decodable>(_ response: AFDataResponse<Data>) -> Result<T, Error>
 
 
-    func objectfromData<T: Decodable>(_ data: Data) -> T?
+    func objectFromData<T: Decodable>(_ data: Data) -> T?
 }
