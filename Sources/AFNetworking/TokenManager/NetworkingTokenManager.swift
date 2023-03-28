@@ -9,7 +9,6 @@ import Foundation
 import Alamofire
 import JWTDecode
 import Store
-import AFNetworkingSession
 
 open class TokenManager {
     enum Keys: String {

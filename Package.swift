@@ -11,12 +11,8 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "AFNetworkingSession",
-            targets: ["AFNetworkingSession"]
-        ),
-        .library(
-            name: "TokenManager",
-            targets: ["TokenManager", "Store", "AFNetworkingSession"]
+            name: "AFNetworking",
+            targets: ["AFNetworking"]
         ),
         .library(
             name: "AFNetworkingUI",
@@ -35,13 +31,13 @@ let package = Package(
             targets: ["BaseProtocols", "AFNetworkingUI"]
         ),
         .library(
-            name: "NotificationManager",
-            targets: ["NotificationManager"]
-        ),
-        .library(
             name: "Extentions",
             targets: ["Extentions"]
         ),
+        .library(
+            name: "NotificationManager",
+            targets: ["NotificationManager"]
+        )
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -71,21 +67,13 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "AFNetworkingSession",
-            dependencies: [
-                .product(name: "Alamofire", package: "Alamofire")
-            ],
-            path: "Sources/AFNetworkingSession"
-        ),
-        .target(
-            name: "TokenManager",
+            name: "AFNetworking",
             dependencies: [
                 .product(name: "Alamofire", package: "Alamofire"),
                 .product(name: "JWTDecode", package: "JWTDecode.swift"),
                 "Store",
-                "AFNetworkingSession"
             ],
-            path: "Sources/TokenManager"
+            path: "Sources/AFNetworking"
         ),
         .target(
             name: "AFNetworkingUI",
@@ -117,14 +105,14 @@ let package = Package(
             path: "Sources/BaseProtocols"
         ),
         .target(
-            name: "NotificationManager",
-            dependencies: [ ],
-            path: "Sources/NotificationManager"
-        ),
-        .target(
             name: "Extentions",
             dependencies: [ ],
             path: "Sources/Extentions"
+        ),
+        .target(
+            name: "NotificationManager",
+            dependencies: [ ],
+            path: "Sources/NotificationManager"
         )
     ]
 )
