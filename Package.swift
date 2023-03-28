@@ -34,10 +34,10 @@ let package = Package(
             name: "BaseProtocols",
             targets: ["BaseProtocols", "AFNetworkingUI"]
         ),
-        .library(
-            name: "Extentions",
-            targets: ["Extentions"]
-        ),
+//        .library(
+//            name: "Extentions",
+//            targets: ["Extentions"]
+//        ),
         .library(
             name: "NotificationManager",
             targets: ["NotificationManager"]
@@ -116,11 +116,11 @@ let package = Package(
             ],
             path: "Sources/BaseProtocols"
         ),
-        .target(
-            name: "Extentions",
-            dependencies: [ ],
-            path: "Sources/Extentions"
-        ),
+//        .target(
+//            name: "Extentions",
+//            dependencies: [ ],
+//            path: "Sources/Extentions"
+//        ),
         .target(
             name: "NotificationManager",
             dependencies: [ ],
