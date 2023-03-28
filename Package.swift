@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Dump",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v15)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -37,6 +37,10 @@ let package = Package(
         .library(
             name: "Extentions",
             targets: ["Extentions"]
+        ),
+        .library(
+            name: "NotificationManager",
+            targets: ["NotificationManager"]
         )
     ],
     dependencies: [
@@ -116,6 +120,11 @@ let package = Package(
             name: "Extentions",
             dependencies: [ ],
             path: "Sources/Extentions"
+        ),
+        .target(
+            name: "NotificationManager",
+            dependencies: [ ],
+            path: "Sources/NotificationManager"
         )
     ]
 )
