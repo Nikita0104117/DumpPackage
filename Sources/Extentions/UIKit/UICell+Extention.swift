@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UITableView {
+public extension UITableView {
     func register<T: UITableViewCell>(_ cellClass: T.Type) {
         self.register(cellClass, forCellReuseIdentifier: cellClass.reusebleId)
     }
@@ -24,7 +24,7 @@ extension UITableView {
     }
 }
 
-extension UICollectionView {
+public extension UICollectionView {
     func register<T: UICollectionViewCell>(_ cellClass: T.Type) {
         self.register(cellClass, forCellWithReuseIdentifier: cellClass.reusebleId)
     }
