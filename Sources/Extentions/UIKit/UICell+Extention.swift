@@ -1,32 +1,42 @@
 //
-//  UICell+Extention.swift
-// AdidasTestProject
+//  UIStackView+Extension.swift
+//  Dump
 //
-//  Created by Nikita Omelchenko on 07.05.2022.
+//  Created by Vyacheslav on 30.03.2023.
 //
 
 import UIKit
 
-public extension UITableViewCell {
-    static var reusebleId: String {
-        String(describing: Self.self)
-    }
-}
-
-public extension UITableView {
-    func register(_ cellClass: UITableViewCell.Type) {
+extension UITableView {
+    func register<T: UITableViewCell>(_ cellClass: T.Type) {
         self.register(cellClass, forCellReuseIdentifier: cellClass.reusebleId)
     }
-}
 
-public extension UICollectionViewCell {
-    static var reusebleId: String {
-        String(describing: Self.self)
+    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T? {
+        dequeueReusableCell(T.self, for: indexPath)
+    }
+
+    func dequeueReusableCell<T: UITableViewCell>(
+        _ cellClass: T.Type,
+        for indexPath: IndexPath
+    ) -> T? {
+        dequeueReusableCell(withIdentifier: cellClass.reusebleId, for: indexPath) as? T
     }
 }
 
-public extension UICollectionView {
-    func register (_ cellClass: UICollectionViewCell.Type) {
+extension UICollectionView {
+    func register<T: UICollectionViewCell>(_ cellClass: T.Type) {
         self.register(cellClass, forCellWithReuseIdentifier: cellClass.reusebleId)
+    }
+
+    func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T? {
+        dequeueReusableCell(T.self, for: indexPath)
+    }
+
+    func dequeueReusableCell<T: UICollectionViewCell>(
+        _ cellClass: T.Type,
+        for indexPath: IndexPath
+    ) -> T? {
+        dequeueReusableCell(withReuseIdentifier: cellClass.reusebleId, for: indexPath) as? T
     }
 }
