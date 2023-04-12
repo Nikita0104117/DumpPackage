@@ -21,6 +21,7 @@ public protocol NetworkingSessionProtocol: AnyObject {
     func uploadFile(_ type: UploadRouterProtocol) -> DataRequest?
 
     func responseData<T: Decodable>(_ response: AFDataResponse<Data>) -> Result<T, Error>
+    func responseDataOptionally<T: Decodable>(_ response: AFDataResponse<Data>) -> Result<T?, Error>
 
 
     func objectFromData<T: Decodable>(_ data: Data) -> T?

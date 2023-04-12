@@ -137,9 +137,67 @@ open class NetworkingSession: NetworkingSessionProtocol {
     }
 
     public func responseData<T: Decodable>(_ response: AFDataResponse<Data>) -> Result<T, Error> {
-        let errorsKey: String = "errors"
-        let message: String = "message"
+        let result = processResponse(response)
 
+        switch result {
+            case .success(let data):
+                guard
+                    let object: T = self.objectFromData(data)
+                else {
+                    return .failure(URLError(.cannotDecodeContentData))
+                }
+
+                return .success(object)
+            case .failure(let error):
+                return .failure(error)
+        }
+    }
+
+    public func responseDataOptionally<T: Decodable>(_ response: AFDataResponse<Data>) -> Result<T?, Error> {
+        let result = processResponse(response)
+
+        switch result {
+            case .success(let data):
+                if data.isEmpty {
+                    return .success(nil)
+                } else {
+                    guard
+                        let object: T = self.objectFromData(data)
+                    else {
+                        return .failure(URLError(.cannotDecodeContentData))
+                    }
+
+                    return .success(object)
+                }
+            case .failure(let error):
+                return .failure(error)
+        }
+    }
+
+    public func objectFromData<T: Decodable>(_ data: Data) -> T? {
+        do {
+            let object = try self.decoder.decode(T.self, from: data)
+            return object
+        } catch let error {
+            debugPrint(error.localizedDescription)
+            return nil
+        }
+    }
+
+    public func errorObjectFromData<T: ServerError>(_ data: Data) -> T? {
+        do {
+            let object = try self.decoder.decode(T.self, from: data)
+            return object
+        } catch let error {
+            debugPrint(error.localizedDescription)
+            return nil
+        }
+    }
+}
+
+// MARK: - Private Methods
+private extension NetworkingSession {
+    func processResponse(_ response: AFDataResponse<Data>) -> Result<Data, Error> {
         switch response.result {
             case .success(let data):
                 guard
@@ -169,39 +227,14 @@ open class NetworkingSession: NetworkingSessionProtocol {
                         break
                 }
 
-                guard
-                    let object: T = self.objectFromData(data)
-                else {
-                    return .failure(URLError(.cannotDecodeContentData))
-                }
-
-                return .success(object)
+                return .success(data)
             case .failure(let error):
                 return .failure(error)
         }
     }
-
-    public func objectFromData<T: Decodable>(_ data: Data) -> T? {
-        do {
-            let object = try self.decoder.decode(T.self, from: data)
-            return object
-        } catch let error {
-            debugPrint(error.localizedDescription)
-            return nil
-        }
-    }
-
-    public func errorObjectFromData<T: ServerError>(_ data: Data) -> T? {
-        do {
-            let object = try self.decoder.decode(T.self, from: data)
-            return object
-        } catch let error {
-            debugPrint(error.localizedDescription)
-            return nil
-        }
-    }
 }
 
+// MARK: - Encodable Extension
 private extension Encodable {
     func asDictionary(encoder: JSONEncoder) -> [String: Any]? {
         do {
